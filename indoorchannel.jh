@@ -41,12 +41,12 @@ entity Estado (estado) {
 
 relationship OneToMany {
   /**
-  * Um pais para muitos estados
+  * Lista de estados
   */
   Pais{estado}
   to
   /**
-    * Um pais
+    * Pais
     */
   Estado{pais(nome) required}
 }
