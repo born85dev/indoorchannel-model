@@ -3,52 +3,81 @@ STRING_MIN_LENGTH = 1
 STRING_MAX_LENGTH = 30
 
 /**
- * Class comments.
+ * Entidade Pais.
  * @author Born85.
  */
 entity Pais (pais) {
   /**
-   * Nome do pais
+   * Nome
    */
   nome String required minlength(1) maxlength(20),
   /**
-   * Padrão ISO Internacional
+   * Padrão ISO
    */
   iso String minlength(2) maxlength(3),
-  /**
-   * Código universal
-   */
-  codigo String minlength(1) maxlength(10)
+    /**
+     * Código de área
+     */
+  codigoDeArea String minlength(1) maxlength(10)
 }
 /**
- * Class comments.
+ * Entidade Estado.
  * @author Born85.
  */
 entity Estado (estado) {
     /**
-     * Nome do estado
+     * Nome
      */
     nome String required minlength(1) maxlength(20),
     /**
-     * Padrão ISO Internacional
+     * Padrão ISO
      */
     iso String minlength(2) maxlength(3),
     /**
-     * Código universal
+     * Código de área
      */
-    codigo String minlength(1) maxlength(10)
+    codigoDeArea String minlength(1) maxlength(10)
+}
+
+/**
+ * Entidade Estado.
+ * @author Born85.
+ */
+entity Cidade (cidade) {
+    /**
+     * Nome
+     */
+    nome String required minlength(1) maxlength(20),
+    /**
+     * Padrão ISO
+     */
+    iso String minlength(2) maxlength(3),
+    /**
+     * Código de área
+     */
+    codigoDeArea String minlength(1) maxlength(10)
 }
 
 relationship OneToMany {
   /**
-  * Lista de estados
+  * Um pais para muitos estados
   */
   Pais{estado}
   to
   /**
-    * Pais
+    * Um pais
     */
-  Estado{pais(nome) required}
+  Estado{pais(nome) required},
+  
+  /**
+  * Um estado para muitas cidades
+  */
+  Estado{cidade}
+  to
+  /**
+  * Um pais
+  */
+  Cidade{estado(nome) required}
 }
 
 dto all with mapstruct
