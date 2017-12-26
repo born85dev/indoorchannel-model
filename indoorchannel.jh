@@ -1,0 +1,57 @@
+// JDL definition for application 'Indoor Channel' generated with command 'jhipster export-jdl'
+STRING_MIN_LENGTH = 1
+STRING_MAX_LENGTH = 30
+
+/**
+ * Class comments.
+ * @author Born85.
+ */
+entity Pais (pais) {
+  /**
+   * Nome do pais
+   */
+  nome String required minlength(1) maxlength(20),
+  /**
+   * Padrão ISO Internacional
+   */
+  iso String minlength(2) maxlength(3),
+  /**
+   * Código universal
+   */
+  codigo String minlength(1) maxlength(10)
+}
+/**
+ * Class comments.
+ * @author Born85.
+ */
+entity Estado (estado) {
+    /**
+     * Nome do estado
+     */
+    nome String required minlength(1) maxlength(20),
+    /**
+     * Padrão ISO Internacional
+     */
+    iso String minlength(2) maxlength(3),
+    /**
+     * Código universal
+     */
+    codigo String minlength(1) maxlength(10)
+}
+
+relationship OneToMany {
+  /**
+  * Um pais para muitos estados
+  */
+  Pais{estado}
+  to
+  /**
+    * Um pais
+    */
+  Estado{pais(nome) required}
+}
+
+dto all with mapstruct
+paginate all with pagination
+service all with serviceClass
+filter all
